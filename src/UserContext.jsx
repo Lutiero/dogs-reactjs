@@ -17,8 +17,7 @@ export const UserStorage = ({children}) => {
         setError(null);
         setLoading(false);
         setLogin(false);
-        navigate('/login');
-    }, [navigate])
+    }, [])
 
     async function getUser(token) {
         const {url, options} = USER_GET(token);
@@ -65,6 +64,8 @@ export const UserStorage = ({children}) => {
                 } finally {
                     setLoading(false);
                 }
+            } else {
+                setLogin(false);
             }
         }
 
