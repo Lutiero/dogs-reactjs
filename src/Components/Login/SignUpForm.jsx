@@ -6,6 +6,7 @@ import {USER_POST} from "../../Api.jsx";
 import {UserContext} from "../../UserContext.jsx";
 import useFetch from "../../Hooks/useFetch.jsx";
 import Error from "../../Helper/Error.jsx";
+import Head from "../../Helper/Head.jsx";
 
 const SignUpForm = () => {
     const username = useForm();
@@ -31,6 +32,7 @@ const SignUpForm = () => {
 
     return (
         <section className="animeLeft">
+            <Head title="Criar conta" />
             <h1 className="title">Cadastre-se</h1>
             <form onSubmit={handleSubmit}>
                 <Input label="Usuário"

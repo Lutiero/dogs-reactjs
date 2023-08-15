@@ -7,6 +7,7 @@ import {UserContext} from "../../UserContext.jsx";
 import Error from "../../Helper/Error.jsx";
 import styles from "./LoginForm.module.css";
 import stylesBtn from "../Forms/Button.module.css"
+import Head from "../../Helper/Head.jsx";
 
 const LoginForm = () => {
     const username = useForm();
@@ -23,6 +24,7 @@ const LoginForm = () => {
 
     return (
         <section className="animeLeft">
+            <Head title="Login" />
             <h1 className='title'>Login</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <Input name="username"
@@ -34,7 +36,7 @@ const LoginForm = () => {
                 {loading ? <Button disabled>Carregando...</Button> : <Button>Entrar</Button>}
             <Error error={error} />
             </form>
-            <Link className={styles.forgot} to={'/login/forgot'}>Perdeu a senha?</Link>
+            <Link className={styles.forgot} to={'/login/forgot-password'}>Perdeu a senha?</Link>
             <div className={styles.signup}>
                 <h2 className={styles.subtitle}>Cadastre-se</h2>
                 <p>Ainda não possui conta? Cadastre-se no site.</p>
