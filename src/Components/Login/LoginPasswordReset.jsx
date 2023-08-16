@@ -1,49 +1,58 @@
-import React, {useEffect, useState} from 'react';
-import Input from "../Forms/Input.jsx";
-import Button from "../Forms/Button.jsx";
-import useForm from "../../Hooks/useForm.jsx";
-import {PASSWORD_RESET} from "../../Api.jsx";
-import useFetch from "../../Hooks/useFetch.jsx";
+import React from 'react';
+import Input from '../Forms/Input';
+import Button from '../Forms/Button';
+import useForm from '../../Hooks/useForm';
+import useFetch from '../../Hooks/useFetch';
+import { PASSWORD_RESET } from '../../Api';
+import { useNavigate } from 'react-router-dom';
 import Error from "../../Helper/Error.jsx";
-import {useNavigate} from "react-router-dom";
-import Head from "../../Helper/Head.jsx";
 
 const LoginPasswordReset = () => {
-    const {login, setLogin} = useState('');
-    const [key, setKey] = useState('');
+    const [login, setLogin] = React.useState('');
+    const [key, setKey] = React.useState('');
     const password = useForm();
-    const {error, loading, request} = useFetch();
+    const { error, loading, request } = useFetch();
     const navigate = useNavigate();
 
-    useEffect(() => {
+    React.useEffect(() => {
         const params = new URLSearchParams(window.location.search);
-        const key = params.get('key')
+        const key = params.get('key');
         const login = params.get('login');
         if (key) setKey(key);
         if (login) setLogin(login);
-    }, [])
+    }, []);
 
     async function handleSubmit(event) {
         event.preventDefault();
         if (password.validate()) {
-            const {url, options} = PASSWORD_RESET({key, login, password: password.value});
-            const {response} = await request(url, options)
+            const { url, options } = PASSWORD_RESET({
+                login,
+                key,
+                password: password.value,
+            });
+            const { response } = await request(url, options);
             if (response.ok) navigate('/login');
         }
     }
 
     return (
-        <div>
-            <Head title="Reset a senha" />
+        <section className='animeLeft'>
+            <h1 className="title">Resete a Senha</h1>
             <form onSubmit={handleSubmit}>
-                <h1 className='title'>Resete a senha</h1>
-                <Input label="Nova senha"
-                       type="passoword"
-                       name="password" {...password} />
-                {loading ? <Button disabled>Resentando...</Button> : <Button>Resetar</Button>}
+                <Input
+                    label="Nova Senha"
+                    type="password"
+                    name="password"
+                    {...password}
+                />
+                {loading ? (
+                    <Button disabled>Resetando...</Button>
+                ) : (
+                    <Button>Resetar</Button>
+                )}
             </form>
-            <Error error={error}/>
-        </div>
+            <Error error={error} />
+        </section>
     );
 };
 

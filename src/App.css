@@ -85,3 +85,17 @@ a {
   }
 }
 
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh + 10rem);
+}
+
+.AppBoby {
+  flex: 1;
+}
+
+.VictoryContainer {
+  height: initial !important;
+}
+

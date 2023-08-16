@@ -28,7 +28,7 @@ function Feed({user}) {
         window.addEventListener('scroll', infiteScroll);
 
         return () => {
-            window.removeEventListener('whell', infiteScroll);
+            window.removeEventListener('wheel', infiteScroll);
             window.removeEventListener('scroll', infiteScroll);
         }
     }, [infinite])
